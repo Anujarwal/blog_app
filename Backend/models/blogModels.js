@@ -1,0 +1,51 @@
+const mongoose = require("mongoose");
+
+const blogSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: [true, "Title is required"],
+    },
+    description: {
+      type: String,
+      required: [true, "Title is discription"],
+    },
+    category: {
+      type: String,
+      required: [true, "Title is category"],
+      enum: [
+        "Technology",
+        "Lifestyle",
+        "Business",
+        "Entertainment",
+        "Sports",
+        "Health",
+        "Other",
+      ],
+    },
+    author: {
+      type: String,
+      required: [true, "Title is author"],
+    },
+    image: {
+      type: String,
+      required: [true, "Title is image"],
+    },
+    status: {
+      type: String,
+      require: true,
+      enum: ["open", "new", "closed"],
+      default: "open",
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = mongoose.model("Blog", blogSchema);
