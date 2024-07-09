@@ -13,10 +13,13 @@ route.get("/", allBlog);
 
 route.get("/:id", singleBlog);
 
-route.post("/", createBlog);
+route.post("/:id", createBlog);
 
 route.put("/:id", updateBlog);
 
 route.delete("/:id", deleteBlog);
 
 module.exports = route;
+
+
+

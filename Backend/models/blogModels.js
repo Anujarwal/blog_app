@@ -31,12 +31,6 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: [true, "Title is image"],
     },
-    status: {
-      type: String,
-      require: true,
-      enum: ["open", "new", "closed"],
-      default: "open",
-    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

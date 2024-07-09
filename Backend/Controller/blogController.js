@@ -3,7 +3,7 @@ const User = require("../models/userModels");
 const asyncHandler = require("express-async-handler");
 
 const allBlog = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.params.id);
 
   if (!user) {
     res.status(401);
@@ -22,7 +22,7 @@ const allBlog = asyncHandler(async (req, res) => {
 });
 
 const singleBlog = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.params.id);
 
   if (!user) {
     res.status(401);
@@ -40,31 +40,34 @@ const singleBlog = asyncHandler(async (req, res) => {
   res.status(200).json(blog);
 });
 
-const createBlog = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
 
+// blog create
+
+
+
+const createBlog = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
   if (!user) {
     res.status(401);
     throw new Error("User Not Found");
   }
 
-  //
+  
 
-  const { title, description, category, author, image, status } = req.body;
+  const { title, description, category, author , image } = req.body;
 
-  if (!title || !description || !category || !author || !image || !status) {
+  if (!title || !description || !category || !author || !image) {
     res.status(400);
     throw new Error("Please add all fields");
   }
 
   const blog = await Blog.create({
-    user: req.user._id,
-    image: req.file.path,
+    user: req.params.id,
+    image,
     title,
     description,
     category,
     author,
-    status: "open",
   });
 
   if (!blog) {
@@ -76,7 +79,7 @@ const createBlog = asyncHandler(async (req, res) => {
 });
 
 const updateBlog = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.params.id);
 
   if (!user) {
     res.status(401);
@@ -96,7 +99,7 @@ const updateBlog = asyncHandler(async (req, res) => {
 });
 
 const deleteBlog = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.params.id);
 
   if (!user) {
     res.status(401);
