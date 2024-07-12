@@ -24,7 +24,7 @@ const blogSchema = new mongoose.Schema(
       ],
     },
     author: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: [true, "Title is author"],
     },
     image: {
