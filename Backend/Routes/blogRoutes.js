@@ -13,7 +13,7 @@ route.get("/", allBlog);
 
 route.get("/:id", singleBlog);
 
-route.post("/:id", createBlog);
+route.post("/", createBlog);
 
 route.put("/:id", updateBlog);
 
