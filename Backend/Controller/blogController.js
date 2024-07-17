@@ -54,9 +54,9 @@ const createBlog = asyncHandler(async (req, res) => {
 
   
 
-  const { title, description, category, author , image } = req.body;
+  const { title, description , image } = req.body;
 
-  if (!title || !description || !category || !author || !image) {
+  if (!title || !description || !image) {
     res.status(400);
     throw new Error("Please add all fields");
   }
@@ -67,7 +67,6 @@ const createBlog = asyncHandler(async (req, res) => {
     title,
     description,
     category,
-    author,
   });
 
   if (!blog) {
