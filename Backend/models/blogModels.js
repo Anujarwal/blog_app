@@ -23,11 +23,6 @@ const blogSchema = new mongoose.Schema(
         "Other",
       ],
     },
-    
-    image: {
-      type: String,
-      required: [true, "Title is image"],
-    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

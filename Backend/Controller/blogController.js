@@ -55,16 +55,15 @@ const createBlog = asyncHandler(async (req, res) => {
     throw new Error("User Not Found");
   }
 
-  const { title, description, image, category } = req.body;
+  const { title, description, category } = req.body;
 
-  if (!title || !description || !image || !category) {
+  if (!title || !description || !category) {
     res.status(400);
     throw new Error("Please add all fields");
   }
 
   const blog = await Blog.create({
     user: req.user._id,
-    image,
     title,
     description,
     category,
