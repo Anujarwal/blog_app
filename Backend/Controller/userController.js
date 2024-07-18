@@ -29,11 +29,14 @@ const userRegister = asyncHandler(async (req, res) => {
 
   if (user) {
     res.status(201).json({
-      _id: user.id,
+      _id: user._id,
       name: user.name,
       email: user.email,
       token: generateToken(user._id),
     });
+  }else{
+    res.status(400);
+    throw new Error("Invalid user data");
   }
 });
 
@@ -42,14 +45,14 @@ const userLogin = asyncHandler(async (req, res) => {
 
   if (!email || !password) {
     res.status(400);
-    throw new Error("Invalid Email and Password");
+    throw new Error("Please add all fields");
   }
 
   const user = await User.findOne({ email });
 
   if (user&& (await bcryptjs.compare(password, user.password))) {
     res.status(200).json({
-        _id: user.id,
+        _id: user._id,
         name: user.name,
         email: user.email,
         token: generateToken(user._id),
