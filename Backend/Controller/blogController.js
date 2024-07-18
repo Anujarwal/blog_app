@@ -37,6 +37,11 @@ const singleBlog = asyncHandler(async (req, res) => {
     throw new Error("Blog not found");
   }
 
+  if(blog.user.toString() !== req.user._id.toString()){
+    res.status(401);
+    throw new Error("User not authorized");
+  }
+
   res.status(200).json(blog);
 });
 
